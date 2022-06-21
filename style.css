@@ -1,3 +1,7 @@
+:root {
+--box-shadow: 8px 4px 1px rgba(199,199,1);
+}
+
 body {
 font-family: 'Rubik', sans-serif;
 display: flex;
@@ -19,5 +23,6 @@ font-size: 1.5em;
 }
 
 .cashflow-containter {
-                
+display: flex;  
+box-shadow: var(--box-shadow);          
 }
