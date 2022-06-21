@@ -1,5 +1,7 @@
 :root {
 --box-shadow: 8px 4px 1px rgba(199,199,1);
+--income: green;
+--expense: red;
 }
 
 body {
@@ -27,4 +29,13 @@ display: flex;
 box-shadow: var(--box-shadow);    
 align-items: center; 
 justify-content: center;     
+}
+
+.income-containter {
+border-right: 1px solid #cccc;
+padding-right: 20px;
+}
+
+.expense-container {
+padding-left: ;
 }
