@@ -24,5 +24,7 @@ font-size: 1.5em;
 
 .cashflow-containter {
 display: flex;  
-box-shadow: var(--box-shadow);          
+box-shadow: var(--box-shadow);    
+align-items: center; 
+justify-content: center;     
 }
