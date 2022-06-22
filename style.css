@@ -1,5 +1,5 @@
 :root {
---box-shadow: 0px 4px 1px rgb(59, 59, 55);
+--box-shadow: 0px 1px 4px 1px rgb(199, 199, 199, 1);
 --income: green;
 --expense: red;
 }
@@ -17,6 +17,7 @@ text-align: center;
 }
 
  h2 {
+font-size: 1.2em;
 text-transform: uppercase;
 }
 
@@ -35,7 +36,7 @@ margin-top: 20px;
 }
 
 .income-container {
-border-radius: 1px solid #cccc;
+border-right: 1px solid #cccccc;
 padding-right: 20px;
 }
 
@@ -44,7 +45,7 @@ padding-left: 20px;
 }
 
 #income, #expense {
-font-size: 1.3em;
+font-size: 1.3rem;
 }
 
 #income {
@@ -55,19 +56,31 @@ color: var(--income);
 color: var(--expense);
 }
 
+.transaction-container {
+margin-top: 20px;
+}
+
 #transaction {
 list-style: none;
 margin: 0;
 padding: 0;
+margin-top: 20px;
 }
 
 #transaction li {
 display: flex;
 flex-direction: row;
-justify-content: space-evenly;
+justify-content: space-between;
 padding: 10px;
-margin-bottom: 10px;
+margin-top: 10px;
 box-shadow: var(--box-shadow);
+}
+
+#transaction li span {
+display: inline-block;
+color: white;
+padding: 5px;
+border-radius: 3px;
 }
 
 #transaction li .income-amt {
@@ -81,6 +94,10 @@ background-color: var(--expense);
 
 #transaction li button {
 padding: 5px 10px 5px 10px;
+}
+
+.form-container {
+margin-top: 40px;
 }
 
 .form-container form {
@@ -103,6 +120,7 @@ padding: 10px;
 margin-bottom: 10px;
 font-size: 1em;
 text-transform: uppercase;
+color: white;
 }
 
 #incomeBtn {
@@ -112,3 +130,4 @@ background-color: var(--income);
 #expenseBtn {
 background-color: var(--expense);
 }
+
