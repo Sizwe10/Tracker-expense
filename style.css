@@ -1,5 +1,5 @@
 :root {
---box-shadow: 8px 4px 1px rgba(199,199,1);
+--box-shadow: 0px 4px 1px rgb(59, 59, 55);
 --income: green;
 --expense: red;
 }
@@ -16,7 +16,7 @@ align-items: center;
 text-align: center;
 }
 
-h2 {
+ h2 {
 text-transform: uppercase;
 }
 
@@ -24,7 +24,7 @@ text-transform: uppercase;
 font-size: 1.5em;
 }
 
-.cashflow-containter {
+.cashflow-container {
 display: flex;  
 box-shadow: var(--box-shadow);    
 align-items: center; 
@@ -34,13 +34,13 @@ padding-top: 20px;
 margin-top: 20px;
 }
 
-.income-containter {
-border-right: 1px solid #cccc;
+.income-container {
+border-radius: 1px solid #cccc;
 padding-right: 20px;
 }
 
 .expense-container {
-padding-left:20px ;
+padding-left: 20px;
 }
 
 #income, #expense {
@@ -48,7 +48,7 @@ font-size: 1.3em;
 }
 
 #income {
-color: var(--income);
+color: var(--income);         
 }
 
 #expense {
@@ -64,9 +64,43 @@ padding: 0;
 #transaction li {
 display: flex;
 flex-direction: row;
-justify-content: space-between;
+justify-content: space-evenly;
 padding: 10px;
 margin-bottom: 10px;
 box-shadow: var(--box-shadow);
 }
 
+#transaction li .income-amt {
+background-color: var(--income);
+
+}
+
+#transaction li .expense-amt {
+background-color: var(--expense);
+}
+
+#transaction li button {
+padding: 5px 10px 5px 10px;
+}
+
+.form-container form {
+display: flex;
+flex-direction: column;
+}
+
+.form-container form label {
+padding-bottom: 10px;
+}
+
+.form-container form input {
+height: 25px;
+margin-bottom: 10px;
+}
+
+.form-container form button  {
+border: none;
+padding: 10px;
+margin-bottom: 10px;
+font-size: 1.2em;
+text-transform: uppercase;
+}
