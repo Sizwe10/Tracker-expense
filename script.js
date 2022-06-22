@@ -34,6 +34,16 @@ function init() {
                 }else  if (item.type === 'expense') {
                 amountEL.classList.add('expense-amt');
                 }
+                amountEL.innerHTML = `$${item.amount}`;
+
+                containerEL.appendChild(amountEL);
+
+                btnEL = document.createElement('button');
+                ntmEL.innerHTML = 'X';
+
+                containerEL.appendChild(btnEL);
+
+                transactionEL.appendChild(containerEL);
     }
 }
   init();
