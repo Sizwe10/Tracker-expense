@@ -104,3 +104,11 @@ margin-bottom: 10px;
 font-size: 1em;
 text-transform: uppercase;
 }
+
+#incomeBtn {
+background-color: var(--income);
+}
+
+#expenseBtn {
+background-color: var(--expense);
+}
