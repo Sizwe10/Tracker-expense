@@ -1,5 +1,5 @@
 var state = {
-    balance: 100,
+    balance: 1000,
     income: 400,
     expense: 100,
     transacrtion: [
@@ -14,36 +14,45 @@ var state = {
  var transactionEL = document.querySelector('#transaction');
 
 function init() {
-    balanceEL.innerHTML = `$${state.balance}`;
-    incomeEL.innerHTML = `$${state.income}`;
-    expenseEL.innerHTML = `$${state.expense}`;
+    updateState();
+    render();
+}
 
-    var transactionEL, containerEL, amountEL, item;
+function updateState() {
+  
+}
 
-    for (var i= 0; i < state.transaction.length; i++){
-                item =state.transaction[i];
-                transactionEL = document.createElement('li')  
-                transactionEL.append(state.item.name);
-                
-                transactionEL.appendChild(transactionEL);
-
-                containerEL = document.createElement('div');
-                amountEL = document.createElement('span');
-                if (item.type === 'income') {
-                  amountEL.classList.add('income-amt');
-                }else  if (item.type === 'expense') {
-                amountEL.classList.add('expense-amt');
+function render() {
+                balanceEL.innerHTML = `$${state.balance}`;
+                incomeEL.innerHTML = `$${state.income}`;
+                expenseEL.innerHTML = `$${state.expense}`;
+            
+                var transactionEL, containerEL, amountEL, item;
+            
+                for (var i= 0; i < state.transaction.length; i++){
+                            item =state.transaction[i];
+                            transactionEL = document.createElement('li')  
+                            transactionEL.append(state.item.name);
+                            
+                            transactionEL.appendChild(transactionEL);
+            
+                            containerEL = document.createElement('div');
+                            amountEL = document.createElement('span');
+                            if (item.type === 'income') {
+                              amountEL.classList.add('income-amt');
+                            }else  if (item.type === 'expense') {
+                            amountEL.classList.add('expense-amt');
+                            }
+                            amountEL.innerHTML = `$${item.amount}`;
+            
+                            containerEL.appendChild(amountEL);
+            
+                            btnEL = document.createElement('button');
+                            ntmEL.innerHTML = 'X';
+            
+                            containerEL.appendChild(btnEL);
+            
+                            transactionEL.appendChild(containerEL);
                 }
-                amountEL.innerHTML = `$${item.amount}`;
-
-                containerEL.appendChild(amountEL);
-
-                btnEL = document.createElement('button');
-                ntmEL.innerHTML = 'X';
-
-                containerEL.appendChild(btnEL);
-
-                transactionEL.appendChild(containerEL);
-    }
 }
   init();
