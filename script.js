@@ -3,9 +3,9 @@ var state = {
     income: 400,
     expense: 100,
     transacrtion: [
-                {name: 'Salary', amount: 5000, type: income},
-                {name: 'Buy Grocery', amount: 500, type: expense},
-                {name: 'Buy Guitar', amount: 500, type: expense}
+                {name: 'Salary', amount: 1000, type: 'income'},
+                {name: 'Buy Grocery', amount: 500, type: 'expense'},
+                {name: 'Buy Guitar', amount: 500, type: 'expense'}
     ]
 }
  var balanceEL = document.querySelector('#balance');
@@ -19,7 +19,22 @@ function init() {
 }
 
 function updateState() {
-  
+  var balance = 0,
+      income = 0,
+      expense = 0,
+      item;
+
+  for (var i = 0; i < state.transaction.lengthl; i++) {
+       item = state.transacrtion[i];
+
+       if (item.type === 'income') {
+           income += item.amount;
+       }else if (item.type === 'expense') {
+          expense += item.amount;
+       }
+  }
+
+  console.log(balance, income, expense);
 }
 
 function render() {
