@@ -2,20 +2,41 @@ var state = {
     balance: 1000,
     income: 400,
     expense: 100,
-    transacrtion: [
-                {name: 'Salary', amount: 1000, type: 'income'},
-                {name: 'Buy Grocery', amount: 500, type: 'expense'},
-                {name: 'Buy Guitar', amount: 500, type: 'expense'}
+    transaction: [
+                {name: 'Salary', amount: 1000, type: 'income' },
+                {name: 'Buy Grocery', amount: 50, type: 'expense' },
+                {name: 'Buy Guitar', amount: 500, type: 'expense' }
     ]
 }
  var balanceEL = document.querySelector('#balance');
  var incomeEL = document.querySelector('#income');
  var expenseEL = document.querySelector('#expense');
  var transactionEL = document.querySelector('#transaction');
-
+ var incomeBtnEL = document.querySelector('#incomeBtn');
+ var expenseBtnEL = document.querySelector('#expenseBtn');
+ var nameInputEL = document.querySelector('#name');
+ var amountInputEL = document.querySelector('#amount')
+ 
 function init() {
     updateState();
+    initListeners();
     render();
+}
+
+function initListeners() {
+  incomeBtnEL.addEventListener('click', onAddIncomeClick);
+  expenseBtnEL.addEventListener('click', onAddExpenseClick);
+}
+
+function onAddIncomeClick() {
+  console.log('income ', nameInputEL.value, amountInputEL.value);
+  var transaction = {
+    name: nameInputEL.value, 
+    amount: parseInt(amountInputEL.value), type: 'income'}
+}
+
+function onAddExpenseClick() {
+  console.log('expense');
 }
 
 function updateState() {
@@ -24,8 +45,8 @@ function updateState() {
       expense = 0,
       item;
 
-  for (var i = 0; i < state.transaction.lengthl; i++) {
-       item = state.transacrtion[i];
+  for (var i = 0; i <state.transaction.length; i++) {
+       item = state.transaction[i];
 
        if (item.type === 'income') {
            income += item.amount;
@@ -34,7 +55,11 @@ function updateState() {
        }
   }
 
-  console.log(balance, income, expense);
+  balance = income - expense;
+
+  state.balance = balance;
+  state.income = income;
+  state.expense = expense;
 }
 
 function render() {
@@ -42,12 +67,12 @@ function render() {
                 incomeEL.innerHTML = `$${state.income}`;
                 expenseEL.innerHTML = `$${state.expense}`;
             
-                var transactionEL, containerEL, amountEL, item;
+                var transactionEL, containerEL, amountEL, item, btnEL;
             
-                for (var i= 0; i < state.transaction.length; i++){
+                for (var i = 0; i < state.transaction.length; i++){
                             item =state.transaction[i];
-                            transactionEL = document.createElement('li')  
-                            transactionEL.append(state.item.name);
+                            transactionEL = document.createElement('li');  
+                            transactionEL.append(item.name);
                             
                             transactionEL.appendChild(transactionEL);
             
