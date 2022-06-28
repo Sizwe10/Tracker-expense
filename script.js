@@ -3,9 +3,9 @@ var state = {
     income: 400,
     expense: 100,
     transactions: [
-                { id: uniqueId(), name: 'Salary', amount: 1000, type: 'income' },
-                { id:uniqueId(), name: 'Buy Grocery', amount: 50, type: 'expense' },
-                { id:uniqueId(), name: 'Buy Guitar', amount: 500, type: 'expense' }
+                // { id: uniqueId(), name: 'Salary', amount: 1000, type: 'income' },
+                // { id:uniqueId(), name: 'Buy Grocery', amount: 50, type: 'expense' },
+                // { id:uniqueId(), name: 'Buy Guitar', amount: 500, type: 'expense' }
     ]
 }
  var balanceEL = document.querySelector('#balance');
@@ -18,9 +18,13 @@ var state = {
  var amountInputEL = document.querySelector('#amount')
  
 function init() {
+    var localStorage = JSON.parse(localStorage.getItem('expenseTrackerState'));
+
+    IF (localStorage !== null) {
+      state = localStorage;
+    }
     updateState();
     initListeners();
-    render();
 }
 
 function uniqueId() {
@@ -35,12 +39,13 @@ function initListeners() {
 // DRY - Do not repeat yourself//
 
 function onAddIncomeClick() {
-  addTransaction(nameInputEL.value, amountInputEL.value);
+  addTransaction(nameInputEL.value, amountInputEL.value, 'income');
 }
 
 function addTransaction(name, amount, type) {
   if (name !== '' && amount !== '') {
     var transaction = {
+      id: uniqueId(),
       name: name,
       amount: parseInt(amount), 
       type: type
@@ -62,7 +67,7 @@ function onAddExpenseClick() {
 }
 
 function onDeleteaClick(event) {
-  var id = event.target.getAttribute('data-id');
+  var id = parseInt(event.target.getAttribute('data-id'));
   var deleteIndex;
   for(var i = 0; i < state.transactions.length; i++) {
     if (state.transactions[i].id === id) {
@@ -82,7 +87,7 @@ function updateState() {
       expense = 0,
       item;
 
-  for (var i = 0; i <state.transactions.length; i++) {
+  for (var i = 0; i < state.transactions.length; i++) {
        item = state.transactions[i];
 
        if (item.type === 'income') {
@@ -97,6 +102,10 @@ function updateState() {
   state.balance = balance;
   state.income = income;
   state.expense = expense;
+
+  localStorage.setItem('expenseTrackerState', JSON.stringify(state))
+
+  render();
 }
 
 function render() {
