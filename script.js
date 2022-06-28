@@ -2,16 +2,16 @@ var state = {
     balance: 1000,
     income: 400,
     expense: 100,
-    transaction: [
-                {name: 'Salary', amount: 1000, type: 'income' },
-                {name: 'Buy Grocery', amount: 50, type: 'expense' },
-                {name: 'Buy Guitar', amount: 500, type: 'expense' }
+    transactions: [
+                { id: uniqueId(), name: 'Salary', amount: 1000, type: 'income' },
+                { id:uniqueId(), name: 'Buy Grocery', amount: 50, type: 'expense' },
+                { id:uniqueId(), name: 'Buy Guitar', amount: 500, type: 'expense' }
     ]
 }
  var balanceEL = document.querySelector('#balance');
  var incomeEL = document.querySelector('#income');
  var expenseEL = document.querySelector('#expense');
- var transactionEL = document.querySelector('#transaction');
+ var transactionsEL = document.querySelector('#transaction');
  var incomeBtnEL = document.querySelector('#incomeBtn');
  var expenseBtnEL = document.querySelector('#expenseBtn');
  var nameInputEL = document.querySelector('#name');
@@ -23,20 +23,57 @@ function init() {
     render();
 }
 
+function uniqueId() {
+  return Math.round(Math.random() * 1000000);
+}
+
 function initListeners() {
   incomeBtnEL.addEventListener('click', onAddIncomeClick);
   expenseBtnEL.addEventListener('click', onAddExpenseClick);
 }
 
+// DRY - Do not repeat yourself//
+
 function onAddIncomeClick() {
-  console.log('income ', nameInputEL.value, amountInputEL.value);
-  var transaction = {
-    name: nameInputEL.value, 
-    amount: parseInt(amountInputEL.value), type: 'income'}
+  addTransaction(nameInputEL.value, amountInputEL.value);
+}
+
+function addTransaction(name, amount, type) {
+  if (name !== '' && amount !== '') {
+    var transaction = {
+      name: name,
+      amount: parseInt(amount), 
+      type: type
+    };
+
+      state.transactions.push(transaction);
+
+      updateState();
+  } else {
+       alert('Please enter valid data');
+  }
+
+  nameInputEL.value = '';
+  amountInputEL.value = '';
 }
 
 function onAddExpenseClick() {
-  console.log('expense');
+ addTransaction(nameInputEL.value, amountInputEL.value, 'expense');
+}
+
+function onDeleteaClick(event) {
+  var id = event.target.getAttribute('data-id');
+  var deleteIndex;
+  for(var i = 0; i < state.transactions.length; i++) {
+    if (state.transactions[i].id === id) {
+        deleteIndex = i;
+        break;
+    }
+  }
+
+  state.transactions.splice(deleteIndex, 1);
+
+  updateState();
 }
 
 function updateState() {
@@ -45,8 +82,8 @@ function updateState() {
       expense = 0,
       item;
 
-  for (var i = 0; i <state.transaction.length; i++) {
-       item = state.transaction[i];
+  for (var i = 0; i <state.transactions.length; i++) {
+       item = state.transactions[i];
 
        if (item.type === 'income') {
            income += item.amount;
@@ -68,13 +105,15 @@ function render() {
                 expenseEL.innerHTML = `$${state.expense}`;
             
                 var transactionEL, containerEL, amountEL, item, btnEL;
+
+                transactionsEL.innerHTML = '';
             
-                for (var i = 0; i < state.transaction.length; i++){
-                            item =state.transaction[i];
+                for (var i = 0; i < state.transactions.length; i++){
+                            item =state.transactions[i];
                             transactionEL = document.createElement('li');  
                             transactionEL.append(item.name);
                             
-                            transactionEL.appendChild(transactionEL);
+                            transactionsEL.appendChild(transactionEL);
             
                             containerEL = document.createElement('div');
                             amountEL = document.createElement('span');
@@ -88,7 +127,10 @@ function render() {
                             containerEL.appendChild(amountEL);
             
                             btnEL = document.createElement('button');
-                            ntmEL.innerHTML = 'X';
+                            btnEL.setAttribute('data-id', item.id);
+                            btnEL.innerHTML = 'X';
+
+                            btnEL.addEventListener('click', onDeleteaClick);
             
                             containerEL.appendChild(btnEL);
             
